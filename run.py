@@ -2,17 +2,24 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 from datetime import datetime
-
+name=''
+def get_time(hours,minutes) :
+    if 9<=hours<18 and 0 <=minutes <60:
+        print(f'your appointment has been booked for {appointment_date} at {time} {name}, see you soon ')
+        return True
+    else:
+        print('salon is closed before 9am and after 18pm')
+        return False
 
 print('Welcome to the hair-beauty booking app')
 user_choice = int(input('please select one option below \n 1) book an appointment \n 2) view availibilitys for today\n 3)cacell appointment\n 4)search appointment\n '))
-if user_choice == 1 :
-    while True: 
-         date = input('Please let us know when you want an appointment (dd/mm/yyyy): ').lower()   
-       # Split the input date string
-         date_obj = date.split('/')
+if user_choice == 1:
+     date = input('Please let us know when you want an appointment (dd/mm/yyyy): ').lower()   
+          # Split the input date string
+     date_obj = date.split('/')
 
-         if len(date_obj) == 3:
+while True: 
+        if len(date_obj) == 3:
             day, month, year = map(int, date_obj)
             current_year = datetime.now().year
             today = datetime.now().date()
@@ -29,24 +36,24 @@ if user_choice == 1 :
                     print(appointment_date)
                     if appointment_date >= today:
                         if appointment_date.weekday() < 5:
-                            name=input('please enter your name ').strip()
-                            time=input('plese enter time ').strip()
-                            hours,minutes=map(int,time.split (':'))
+                            name=input('please enter your name ').strip() 
+                            time=input('plese enter valid time ').strip()
+                            if time:
                                 
-                            if 9<=hours<18 and 0 <=minutes <60:
-                                print('your appointment has been booked ')
-                                break
+                                hours,minutes=map(int,time.split (':'))   
+                               
+                                if get_time(hours,minutes) :
+                                    break
+                                 else :
+                                     print('enter valid time')
                             else:
-                                print('salon is closed before 9am and after 18pm')
-    
+                                print('Please choose another option because we are closed on weekends')
                         else:
-                            print('Please choose another option because we are closed on weekends')
+                            print('date is in past please enter  future or todays date ')
                     else:
-                        print('date is in past please enter  future or todays date ')
+                        print('Invalid date format. Please use valid dd/mm/yyyy format.')       
                 else:
-                    print('Invalid date format. Please use valid dd/mm/yyyy format.')       
-            else:
-                print('Invalid date format. Please use valid dd/mm/yyyy format.')
+                    print('Invalid date format. Please use valid dd/mm/yyyy format.')
 
 
 
