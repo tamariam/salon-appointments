@@ -2,18 +2,26 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 from datetime import datetime
-name=''
-def get_time(hours,minutes) :
-    if 9<=hours<18 and 0 <=minutes <60:
+
+def get_time(hours,minutes):
+    if 9<=hours<18 and 0 <=minutes<60:
         print(f'your appointment has been booked for {appointment_date} at {time} {name}, see you soon ')
         return True
     else:
         print('salon is closed before 9am and after 18pm')
         return False
+def show_appointment(appointments) :
+    print('\n appointments')
+    print('Name\t\tDate\t\tTime')
+    print('-' *40)
+    for appointment in appointments :
+        print(f'{appointment["name"]}\t\t{appointment["date"]}\t\t{appointment["time"]}')
 
 print('Welcome to the hair-beauty booking app')
-user_choice = int(input('please select one option below \n 1) book an appointment \n 2) view availibilitys for today\n 3)cacell appointment\n 4)search appointment\n '))
+user_choice = int(input('please select one option below \n 1) book an appointment\n 2) view availibilitys for today\n 3)cacell appointment\n 4)search appointment\n '))
+appointments=[]
 if user_choice == 1:
+    
      date = input('Please let us know when you want an appointment (dd/mm/yyyy): ').lower()   
           # Split the input date string
      date_obj = date.split('/')
@@ -24,7 +32,7 @@ while True:
             current_year = datetime.now().year
             today = datetime.now().date()
             print(today)
-            if 1 <= day <= 31 and 1 <= month <= 12 and year <=current_year :
+            if 1 <= day <= 31 and 1 <= month <= 12  and year >=current_year:
                 if month==2 :
                     max_day=29
                 elif month in[4,6,9,11] :
@@ -42,19 +50,19 @@ while True:
                                 
                                 hours,minutes=map(int,time.split (':'))   
                                
-                                if get_time(hours,minutes) :
-                                    break
-                                 else :
-                                     print('enter valid time')
-                            else:
-                                print('Please choose another option because we are closed on weekends')
+                                if get_time(hours, minutes) :
+                                   appointments.append({'name': name, 'date': appointment_date, 'time': time})
+                                   show_appointment(appointments)
+                                   break
+                                else:
+                                    print('enter valid time')
                         else:
-                            print('date is in past please enter  future or todays date ')
+                            print('Please choose another option because we are closed on weekends')
+                            break
                     else:
-                        print('Invalid date format. Please use valid dd/mm/yyyy format.')       
+                        print('date is in past please enter  future or todays date ')
+                        break
                 else:
-                    print('Invalid date format. Please use valid dd/mm/yyyy format.')
-
-
-
-    
+                    print('Invalid date format. Please use valid dd/mm/yyyy format.')       
+            else:
+                print('Invalid date format. Please use valid dd/mm/yyyy format.')
