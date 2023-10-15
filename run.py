@@ -13,7 +13,7 @@ def get_time(hours,minutes):
 def show_appointment(appointments) :
     print('\n appointments')
     print('Name\t\tDate\t\tTime')
-    print('-' *40)
+    print('-' *50)
     for appointment in appointments :
         print(f'{appointment["name"]}\t\t{appointment["date"]}\t\t{appointment["time"]}')
 
@@ -22,7 +22,7 @@ user_choice = int(input('please select one option below \n 1) book an appointmen
 appointments=[]
 if user_choice == 1:
     
-     date = input('Please let us know when you want an appointment (dd/mm/yyyy): ').lower()   
+     date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
           # Split the input date string
      date_obj = date.split('/')
 
@@ -45,7 +45,7 @@ while True:
                     if appointment_date >= today:
                         if appointment_date.weekday() < 5:
                             name=input('please enter your name ').strip() 
-                            time=input('plese enter valid time ').strip()
+                            time=int(input('plese choose one option below\n 1)09:00 \n2)10:00 \n3)11:00 \n 4) 12:00 \n 4)14:00 \n5)15:00'))
                             if time:
                                 
                                 hours,minutes=map(int,time.split (':'))   
