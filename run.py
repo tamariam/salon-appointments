@@ -51,16 +51,19 @@ while True:
                         if appointment_date.weekday() < 5:
                             name=input('please enter your name ').strip() 
                             if name_validator(name):
-                                time_options=int(input('plese choose one option below\n1) 09:00\n2) 10:00\n3) 11:00\n4) 12:00\n4) 14:00\n5) 15:00\n'))
-                                if time_validator(time_options):
-                                    time_availibilities=['09:00', '10:00', '11:00' ,'12:00', '14:00', '15:00']
-                                    time=time_availibilities[time_options-1]
-                                    print(f'your appointment has been booked for {appointment_date} at {time} {name}, see you soon ')
-                                    appointments.append({'name': name, 'date': appointment_date, 'time': time})
-                                    show_appointment(appointments)
-                                    break
-                                else:
-                                    print('invalid time option please choose  a valid one')
+                                try:
+                                    time_options=int(input('plese choose one option below\n1) 09:00\n2) 10:00\n3) 11:00\n4) 12:00\n4) 14:00\n5) 15:00\n'))
+                                    if time_validator(time_options):
+                                        time_availibilities=['09:00', '10:00', '11:00' ,'12:00', '14:00', '15:00']
+                                        time=time_availibilities[time_options-1]
+                                        print(f'your appointment has been booked for {appointment_date} at {time} {name}, see you soon ')
+                                        appointments.append({'name': name, 'date': appointment_date, 'time': time})
+                                        show_appointment(appointments)
+                                        break
+                                    else:
+                                        print('invalid time option please choose  a valid one')
+                                except VallueError:
+                                    print('please enter only number for time option')            
                             else:
                                 print('invalid name format, name should only include letters')        
                         else:
