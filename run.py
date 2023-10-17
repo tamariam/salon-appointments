@@ -3,13 +3,12 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 from datetime import datetime
 
-def get_time(hours,minutes):
-    if 9<=hours<18 and 0 <=minutes<60:
-        print(f'your appointment has been booked for {appointment_date} at {time} {name}, see you soon ')
+def name_validator(name) :
+    if name.isalpha():
         return True
     else:
-        print('salon is closed before 9am and after 18pm')
-        return False
+        return False    
+  
 def show_appointment(appointments) :
     print('\n appointments')
     print('Name\t\tDate\t\tTime')
@@ -45,17 +44,17 @@ while True:
                     if appointment_date >= today:
                         if appointment_date.weekday() < 5:
                             name=input('please enter your name ').strip() 
-                            time=int(input('plese choose one option below\n 1)09:00 \n2)10:00 \n3)11:00 \n 4) 12:00 \n 4)14:00 \n5)15:00'))
-                            if time:
-                                
-                                hours,minutes=map(int,time.split (':'))   
-                               
-                                if get_time(hours, minutes) :
-                                   appointments.append({'name': name, 'date': appointment_date, 'time': time})
-                                   show_appointment(appointments)
-                                   break
+                            if name_validator(name):
+                                time=int(input('plese choose one option below\n 1)09:00 \n2)10:00 \n3)11:00 \n 4) 12:00 \n 4)14:00 \n5)15:00'))
+                                if time:
+                                    print(f'your appointment has been booked for {appointment_date} at {time} {name}, see you soon ')
+                                    appointments.append({'name': name, 'date': appointment_date, 'time': time})
+                                    show_appointment(appointments)
+                                    break
                                 else:
-                                    print('enter valid time')
+                                    print('please choose one option')
+                            else:
+                                print('invalid name format, name should only include letters')        
                         else:
                             print('Please choose another option because we are closed on weekends')
                             break
