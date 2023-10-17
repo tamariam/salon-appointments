@@ -1,6 +1,7 @@
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
+import json
 from datetime import datetime
 
 def time_validator(time_option):
@@ -58,6 +59,8 @@ while True:
                                         time=time_availibilities[time_options-1]
                                         print(f'your appointment has been booked for {appointment_date} at {time} {name}, see you soon ')
                                         appointments.append({'name': name, 'date': appointment_date, 'time': time})
+                                        with open('appointments.json', 'w') as file:
+                                            json.dump(appointments,file)    
                                         show_appointment(appointments)
                                         break
                                     else:
