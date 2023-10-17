@@ -4,10 +4,12 @@
 from datetime import datetime
 
 def name_validator(name) :
-    if name.isalpha():
-        return True
-    else:
-        return False    
+    name_word=name.split()
+    for word in name_word:
+        if not word.isalpha():
+            return False
+
+    return True   
   
 def show_appointment(appointments) :
     print('\n appointments')
