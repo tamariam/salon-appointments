@@ -3,6 +3,10 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 from datetime import datetime
 
+def time_validator(time_option):
+    valid_options=[1,2,3,4,5,6,]
+    return time_option in valid_options    
+
 def name_validator(name) :
     name_word=name.split()
     for word in name_word:
@@ -19,7 +23,7 @@ def show_appointment(appointments) :
         print(f'{appointment["name"]}\t\t{appointment["date"]}\t\t{appointment["time"]}')
 
 print('Welcome to the hair-beauty booking app')
-user_choice = int(input('please select one option below \n 1) book an appointment\n 2) view availibilitys for today\n 3)cacell appointment\n 4)search appointment\n '))
+user_choice = int(input('please select one option below \n1) book an appointment\n2) view availibilitys for today\n3) cacell appointment\n4) search appointment\n '))
 appointments=[]
 if user_choice == 1:
     
@@ -47,14 +51,16 @@ while True:
                         if appointment_date.weekday() < 5:
                             name=input('please enter your name ').strip() 
                             if name_validator(name):
-                                time=int(input('plese choose one option below\n 1)09:00 \n2)10:00 \n3)11:00 \n 4) 12:00 \n 4)14:00 \n5)15:00'))
-                                if time:
+                                time_options=int(input('plese choose one option below\n1) 09:00\n2) 10:00\n3) 11:00\n4) 12:00\n4) 14:00\n5) 15:00\n'))
+                                if time_validator(time_options):
+                                    time_availibilities=['09:00', '10:00', '11:00' ,'12:00', '14:00', '15:00']
+                                    time=time_availibilities[time_options-1]
                                     print(f'your appointment has been booked for {appointment_date} at {time} {name}, see you soon ')
                                     appointments.append({'name': name, 'date': appointment_date, 'time': time})
                                     show_appointment(appointments)
                                     break
                                 else:
-                                    print('please choose one option')
+                                    print('invalid time option please choose  a valid one')
                             else:
                                 print('invalid name format, name should only include letters')        
                         else:
