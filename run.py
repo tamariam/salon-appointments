@@ -4,6 +4,7 @@
 import json
 import os
 from datetime import datetime
+
 file_path='appointments.json'
 
 
@@ -65,10 +66,9 @@ def main_menu():
                                             with open('appointments.json', 'w') as file:
                                                 json.dump(appointments,file)    
                                             show_appointment(appointments)
-                                            user_click=input('click 1 to go back to main menu ')
+                                            user_click=int(input('click 1 to go back to main menu '))
                                             if user_click==1:
-                                                main_menu()
-                                            break
+                                                continue
                                         else:
                                             print('invalid time option please choose  a valid one')
                                     except ValueError:
@@ -85,3 +85,5 @@ def main_menu():
                         print('Invalid date format. Please use valid dd/mm/yyyy format.')       
                 else:
                     print('Invalid date format. Please use valid dd/mm/yyyy format.')
+ if  __name__=='__main__' :
+    main_menu()                
