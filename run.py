@@ -28,13 +28,15 @@ def show_appointment(appointments) :
         print(f'{appointment["name"]}\t\t{appointment["date"]}\t\t{appointment["time"]}')
 def main_menu():
     print('Welcome to the hair-beauty booking app')
-    user_choice = int(input('please select one option below \n1) book an appointment\n2) view availibilitys for today\n3) cacell appointment\n4) search appointment\n '))
     appointments=[]
-    if user_choice == 1:
-        
-        date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
-            # Split the input date string
-        date_obj = date.split('/')
+    while True:
+        user_choice = int(input('please select one option below \n1) book an appointment\n2) view availibilitys for today\n3) cacell appointment\n4) search appointment\n '))
+        if user_choice == 1:
+            book_appointment(appointments)
+def book_appointment(appointments):        
+    date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
+    # Split the input date string
+    date_obj = date.split('/')
 
     while True: 
             if len(date_obj) == 3:
@@ -68,7 +70,7 @@ def main_menu():
                                             show_appointment(appointments)
                                             user_click=int(input('click 1 to go back to main menu '))
                                             if user_click==1:
-                                                continue
+                                                return
                                         else:
                                             print('invalid time option please choose  a valid one')
                                     except ValueError:
