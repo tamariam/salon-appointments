@@ -1,9 +1,10 @@
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
+from datetime import datetime
 import json
 import os
-from datetime import datetime
+
 
 file_path='appointments.json'
 
@@ -26,13 +27,18 @@ def show_appointment(appointments) :
     print('-' *50)
     for appointment in appointments :
         print(f'{appointment["name"]}\t\t{appointment["date"]}\t\t{appointment["time"]}')
-def main_menu():
-    print('Welcome to the hair-beauty booking app')
-    appointments=[]
-    while True:
-        user_choice = int(input('please select one option below \n1) book an appointment\n2) view availibilitys for today\n3) cacell appointment\n4) search appointment\n '))
-        if user_choice == 1:
-            book_appointment(appointments)
+
+
+def todays_appointments(appointments):
+    today=datetime.now().date()
+    todays_bookings=[appointment for appointment in appointments if appointment['date']==today]
+    if todays_bookings:
+        print('todays availibilities: ')
+        show_appointment(todays_bookings)
+    else:
+        print('no availbility for today')    
+
+
 def book_appointment(appointments):        
     date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
     # Split the input date string
@@ -66,7 +72,7 @@ def book_appointment(appointments):
                                             print(f'your appointment has been booked for {appointment_date} at {time} {name}, see you soon ')
                                             appointments.append({'name': name, 'date': appointment_date.strftime('%d/%m/%Y'), 'time': time})
                                             with open('appointments.json', 'w') as file:
-                                                json.dump(appointments,file)    
+                                                json.dump(appointments, file)    
                                             show_appointment(appointments)
                                             user_click=int(input('click 1 to go back to main menu '))
                                             if user_click==1:
@@ -87,5 +93,16 @@ def book_appointment(appointments):
                         print('Invalid date format. Please use valid dd/mm/yyyy format.')       
                 else:
                     print('Invalid date format. Please use valid dd/mm/yyyy format.')
+def main_menu():
+     with open('appointments.json', 'r') as file:
+        appointments=json.load(file)
+        print('Welcome to the hair-beauty booking app')
+      
+        while True:
+            user_choice = int(input('please select one option below \n1) book an appointment\n2) view availibilitys for today\n3) cacell appointment\n4) search appointment\n '))
+            if user_choice == 1:
+                book_appointment(appointments)
+            elif user_choice == 2:
+                todays_appointments(appointments)                   
 if  __name__=='__main__' :
     main_menu()                
