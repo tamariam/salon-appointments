@@ -57,8 +57,11 @@ def todays_appointments(appointments):
 def back_to_menu():
      while True:
             user_click=int(input('click 1 to go back to main menu '))
-            if user_click==1:
-                break
+            try:
+                if user_click==1:
+                    break
+            except ValueError:
+                print('please enter 1 to  go back to main menu')
 def book_appointment(appointments):        
     date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
     # Split the input date string
