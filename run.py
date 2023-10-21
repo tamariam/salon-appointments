@@ -11,7 +11,14 @@ file_path='appointments.json'
 
 def time_validator(time_option):
     valid_options=[1,2,3,4,5,6]
-    return time_option in valid_options    
+    return time_option in valid_options  
+def booked_time_slots(appointments,correct_format_date) :
+    booked_times=[]
+    for appointment in appointments:
+        if appointment['date']== correct_format_date:
+            booked_times.append(appointment['time'])
+    return booked_time_slots       
+
 
 def name_validator(name) :
     name_word=name.split()
@@ -95,10 +102,12 @@ def book_appointment(appointments):
                                     try:
                                         time_options=int(input('plese choose one option below\n1) 09:00\n2) 10:00\n3) 11:00\n4) 12:00\n5) 14:00\n6) 15:00\n'))
                                         if time_validator(time_options):
+                                           
                                             time_availibilities=['09:00', '10:00', '11:00' ,'12:00', '14:00', '15:00']
                                             time=time_availibilities[time_options-1]
                                             print(f'your appointment has been booked for {correct_format_date} at {time} {name}, see you soon ')
                                             appointments.append({'name': name, 'date': correct_format_date, 'time': time})
+                                        
                                             # with open('appointments.json', 'w') as file:
                                             #     json.dump(appointments, file)    
                                             show_appointment(appointments)
