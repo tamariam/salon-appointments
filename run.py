@@ -6,7 +6,8 @@ import json
 import os
 
 
-file_path='appointments.json'
+
+FILE_PATH = 'appointments.json'
 
 
 def time_validator(time_option):
@@ -28,6 +29,9 @@ def name_validator(name) :
 
     return True   
   
+def user_choice_validator(user_choice):
+    user_options=[1,2,3,4,0]
+    return user_choice in user_options  
 def show_appointment(appointments) :
     print('\n appointments')
     print('Name\t\tDate\t\tTime')
@@ -59,8 +63,8 @@ def todays_appointments(appointments):
     #     user_click=int(input('click 1 to go back to main menu '))
     #     if user_click==1:
     #         break
-                
- 
+                               
+
 def back_to_menu():
      while True:
             user_click=int(input('click 1 to go back to main menu '))
@@ -117,7 +121,7 @@ def book_appointment(appointments):
                                                     show_appointment(appointments)
                                                     user_click=int(input('click 1 to go back to main menu '))
                                             
-                                                    if user_click==1:
+                                                    if user_click == 1:
                                                         break 
                                         else:
                                             print('invalid time option please choose  a valid one')
@@ -130,26 +134,46 @@ def book_appointment(appointments):
                         print('Invalid date format. Please use valid dd/mm/yyyy format.')       
                 else:
                     print('Invalid date format. Please use valid dd/mm/yyyy format.')
+                    break
     return appointments                    
 def main_menu():
     try:
-        with open('appointments.json', 'r') as file:
+        with open(FILE_PATH, 'r') as file:
             appointments = json.load(file)
     except FileNotFoundError:
         appointments  =[]     
-        
+#     while True:
+#         print('Welcome to the hair-beauty booking app')
+#         user_choice = int(input('please select one option below \n1) book an appointment \n2) Todays appointments\n3) cacell appointment\n4) search appointment\n '))
+#         if user_choice == 1:
+#             appointments=book_appointment(appointments)
+#         elif user_choice == 2:
+#             todays_appointments(appointments)
+#         elif user_choice == 0:
+#             break
+#     else:
+#         print('blababab')         
+                  
+#     with open(FILE_PATH, 'w') as file:
+#         json.dump(appointments,file)          
+                                    
+# if  __name__=='__main__' :
+#       main_menu()    
     while True:
         print('Welcome to the hair-beauty booking app')
-        user_choice = int(input('please select one option below \n1) book an appointment \n2) Todays appointments\n3) cacell appointment\n4) search appointment\n '))
+        user_choice = int(input('please select one option below \n1) book an appointment \n2) Todays appointments\n3) cancel appointment\n4) search appointment\n0) exit\n'))
         if user_choice == 1:
-            appointments=book_appointment(appointments)
+            appointments = book_appointment(appointments)
         elif user_choice == 2:
-            todays_appointments(appointments) 
-                
-        
-        
-    with open('appointments.json', 'w') as file:
-            json.dump(appointments,file)          
-                                    
-if  __name__=='__main__' :
-    main_menu()                
+            todays_appointments(appointments)
+        elif user_choice == 3:
+           pass
+        elif user_choice == 4:
+            pass
+        elif user_choice == 0:
+            break
+        else:
+            print('Invalid option. Please select a valid option.')
+            
+    with open(FILE_PATH, 'w') as file:
+        json.dump(appointments, file)
