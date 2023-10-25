@@ -4,8 +4,9 @@
 from datetime import datetime
 import json
 import os
-
-
+ 
+def screen_clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 FILE_PATH = 'appointments.json'
 
@@ -48,7 +49,7 @@ def just_booked(new_appointment):
         print(new_appointment)
 
 def todays_appointments(appointments):
-   
+    screen_clear()
     today = datetime.now().date()
     correct_format_today = today.strftime('%d/%m/%Y')
     print(today)
@@ -61,8 +62,10 @@ def todays_appointments(appointments):
         print('todays appointments: ')
         show_appointment(todays_bookings)
         print(todays_bookings)
+       
     else:
         print('no appointments booked for today')
+        
 
     back_to_menu()    
 
@@ -77,10 +80,15 @@ def back_to_menu():
             user_click=int(input('click 1 to go back to main menu '))
             try:
                 if user_click==1:
+                   screen_clear()
                     break
             except ValueError:
                 print('please enter 1 to  go back to main menu')
+                
+
+
 def book_appointment(appointments): 
+    screen_clear()
     while True:       
         date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
         if not date.count('/') == 2:
@@ -112,7 +120,6 @@ def book_appointment(appointments):
                             print('Please choose another option because we are closed on weekends')
                             break
                         else:    
-                        
                             name=input('please enter your name ').strip() 
                             if name_validator(name):
                                     try:
@@ -122,6 +129,7 @@ def book_appointment(appointments):
                                             time_availibilities = ['09:00', '10:00', '11:00' ,'12:00', '14:00', '15:00']
                                             time=time_availibilities[time_options-1]
                                             booked_time = booked_times(appointments,correct_format_date)
+                                            screen_clear()
                                             if time in booked_time:
                                                 print(f'{time} on {correct_format_date}is already boooked,please try another time')
                                             else:
@@ -135,6 +143,7 @@ def book_appointment(appointments):
                                                     user_click = int(input('click 1 to go back to main menu '))
                                             
                                                     if user_click == 1:
+                                                        screen_clear()
                                                         break 
                                         else:
                                             print('invalid time option please choose  a valid one')
@@ -147,9 +156,11 @@ def book_appointment(appointments):
                         print('Invalid date format. Please use valid dd/mm/yyyy format.')       
                 else:
                     print('Invalid date format. Please use valid dd/mm/yyyy format.')
-                    break
-    return appointments                    
+                    
+    return appointments 
+                       
 def main_menu():
+    screen_clear()
     try:
         with open(FILE_PATH, 'r') as file:
             appointments = json.load(file)
@@ -164,6 +175,7 @@ def main_menu():
             elif user_choice == 2:
                 todays_appointments(appointments)
             elif user_choice == 0:
+                screen_clear()
                 break
             else:
                 print('Invalid input. Please select a valid option.') 
