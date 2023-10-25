@@ -32,13 +32,20 @@ def name_validator(name) :
 def user_choice_validator(user_choice):
     user_options=[1,2,3,4,0]
     return user_choice in user_options  
+
 def show_appointment(appointments) :
     print('\n appointments')
     print('Name\t\tDate\t\tTime')
     print('-' *50)
     for appointment in appointments :
         print(f'{appointment["name"]}\t\t{appointment["date"]}\t\t{appointment["time"]}')
-
+def just_booked(new_appointment):
+    if isinstance(new_appointment, dict):
+        print(f'Name: {new_appointment.get("name", "N/A")}')
+        print(f'Date: {new_appointment.get("date", "N/A")}')
+        print(f'Time: {new_appointment.get("time", "N/A")}')
+    else:
+        print(new_appointment)
 
 def todays_appointments(appointments):
    
@@ -96,7 +103,6 @@ def book_appointment(appointments):
                         print(correct_format_date)
                         if appointment_date < today:
                             print('date is in past please enter  future or todays date ')
-                            continue
                         elif appointment_date.weekday() in [5,6]:
                             print('Please choose another option because we are closed on weekends')
                             break
@@ -114,12 +120,13 @@ def book_appointment(appointments):
                                             if time in booked_time:
                                                 print(f'{time} on {correct_format_date}is already boooked,please try another time')
                                             else:
+                                                    new_appointment={'name': name, 'date' :correct_format_date, 'time' : time}
                                                     print(f'your appointment has been booked for {correct_format_date} at {time} {name}, see you soon ')
-                                                    appointments.append({'name': name, 'date': correct_format_date, 'time': time})
+                                                    appointments.append(new_appointment)
                                             
                                                 # with open('appointments.json', 'w') as file:
                                                 #     json.dump(appointments, file)    
-                                                    show_appointment(appointments)
+                                                    just_booked(new_appointment)
                                                     user_click = int(input('click 1 to go back to main menu '))
                                             
                                                     if user_click == 1:
