@@ -11,7 +11,7 @@ FILE_PATH = 'appointments.json'
 
 
 def time_validator(time_option):
-    valid_options=[1,2,3,4,5,6]
+    valid_options= [1,2,3,4,5,6]
     return time_option in valid_options  
 def booked_times(appointments,correct_format_date) :
     booked_times=[]
@@ -43,12 +43,12 @@ def show_appointment(appointments) :
 def todays_appointments(appointments):
    
     today = datetime.now().date()
-    correct_format_today=today.strftime('%d/%m/%Y')
+    correct_format_today = today.strftime('%d/%m/%Y')
     print(today)
     
-    todays_bookings=[]
+    todays_bookings= []
     for appointment in appointments:
-        if  appointment["date"] ==correct_format_today:
+        if  appointment["date"] == correct_format_today:
             todays_bookings.append(appointment)
     if todays_bookings:
         print('todays appointments: ')
@@ -83,19 +83,20 @@ def book_appointment(appointments):
                 day, month, year = map(int, date_obj)
                 current_year = datetime.now().year
                 today = datetime.now().date()
-                if 1 <= day <= 31 and 1 <= month <= 12  and year >=current_year:
-                    if month==2 :
-                        max_day=29
-                    elif month in[4,6,9,11] :
-                        max_day=30
+                if 1 <= day <= 31 and 1 <= month <= 12  and year >= current_year:
+                    if month == 2 :
+                        max_day = 29
+                    elif month in [4,6,9,11] :
+                        max_day = 30
                     else:
-                        max_day=31
-                    if 1<=day<=max_day:        
+                        max_day = 31
+                    if 1 <= day <= max_day :        
                         appointment_date = datetime(year, month, day).date()
-                        correct_format_date=appointment_date.strftime('%d/%m/%Y')
+                        correct_format_date = appointment_date.strftime('%d/%m/%Y')
                         print(correct_format_date)
                         if appointment_date < today:
                             print('date is in past please enter  future or todays date ')
+                            continue
                         elif appointment_date.weekday() in [5,6]:
                             print('Please choose another option because we are closed on weekends')
                             break
@@ -107,9 +108,9 @@ def book_appointment(appointments):
                                         time_options=int(input('plese choose one option below\n1) 09:00\n2) 10:00\n3) 11:00\n4) 12:00\n5) 14:00\n6) 15:00\n'))
                                         if time_validator(time_options):
                                             
-                                            time_availibilities=['09:00', '10:00', '11:00' ,'12:00', '14:00', '15:00']
+                                            time_availibilities = ['09:00', '10:00', '11:00' ,'12:00', '14:00', '15:00']
                                             time=time_availibilities[time_options-1]
-                                            booked_time=booked_times(appointments,correct_format_date)
+                                            booked_time = booked_times(appointments,correct_format_date)
                                             if time in booked_time:
                                                 print(f'{time} on {correct_format_date}is already boooked,please try another time')
                                             else:
@@ -119,7 +120,7 @@ def book_appointment(appointments):
                                                 # with open('appointments.json', 'w') as file:
                                                 #     json.dump(appointments, file)    
                                                     show_appointment(appointments)
-                                                    user_click=int(input('click 1 to go back to main menu '))
+                                                    user_click = int(input('click 1 to go back to main menu '))
                                             
                                                     if user_click == 1:
                                                         break 
@@ -141,39 +142,26 @@ def main_menu():
         with open(FILE_PATH, 'r') as file:
             appointments = json.load(file)
     except FileNotFoundError:
-        appointments  =[]     
-#     while True:
-#         print('Welcome to the hair-beauty booking app')
-#         user_choice = int(input('please select one option below \n1) book an appointment \n2) Todays appointments\n3) cacell appointment\n4) search appointment\n '))
-#         if user_choice == 1:
-#             appointments=book_appointment(appointments)
-#         elif user_choice == 2:
-#             todays_appointments(appointments)
-#         elif user_choice == 0:
-#             break
-#     else:
-#         print('blababab')         
-                  
-#     with open(FILE_PATH, 'w') as file:
-#         json.dump(appointments,file)          
-                                    
-# if  __name__=='__main__' :
-#       main_menu()    
+        appointments = []     
     while True:
         print('Welcome to the hair-beauty booking app')
-        user_choice = int(input('please select one option below \n1) book an appointment \n2) Todays appointments\n3) cancel appointment\n4) search appointment\n0) exit\n'))
-        if user_choice == 1:
-            appointments = book_appointment(appointments)
-        elif user_choice == 2:
-            todays_appointments(appointments)
-        elif user_choice == 3:
-           pass
-        elif user_choice == 4:
-            pass
-        elif user_choice == 0:
-            break
-        else:
-            print('Invalid option. Please select a valid option.')
-            
+        try:
+            user_choice = int(input('please select one option below \n1) book an appointment \n2) Todays appointments\n3) cacell appointment\n4) search appointment\n0) Quit \n '))
+            if user_choice == 1:
+                appointments=book_appointment(appointments)
+            elif user_choice == 2:
+                todays_appointments(appointments)
+            elif user_choice == 0:
+                break
+            else:
+                print('Invalid input. Please select a valid option.') 
+        except ValueError:
+            print('please use only numbers from 0 to 4')
+                
+                  
     with open(FILE_PATH, 'w') as file:
-        json.dump(appointments, file)
+        json.dump(appointments,file)          
+                                    
+if  __name__=='__main__' :
+      main_menu()    
+
