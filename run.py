@@ -80,10 +80,15 @@ def back_to_menu():
                     break
             except ValueError:
                 print('please enter 1 to  go back to main menu')
-def book_appointment(appointments):        
-    date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
-    # Split the input date string
-    date_obj = date.split('/')
+def book_appointment(appointments): 
+    while True:       
+        date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
+        if not date.count('/') == 2:
+            print('invalid date format, please use dd/mm/yyyy format only')
+        else:
+        # Split the input date string
+            date_obj = date.split('/')
+            break
 
     while True: 
             if len(date_obj) == 3:
