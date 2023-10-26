@@ -73,7 +73,7 @@ def search_appointment(appointments):
     while True :
         search_method=int(input('please mark one option below:\n 1)search appointment by name\n 2) search appointment by date\n'))
         if search_method == 1:
-            print('yes')
+           pass
         return appointments
                                
 
@@ -86,19 +86,29 @@ def back_to_menu():
                    break
             except ValueError:
                 print('please enter 1 to  go back to main menu')
-                
+def date_validation(date) :
+    if not date.count('/') == 2:
+            print('invalid date format, please use dd/mm/yyyy format only')
+    else:
+        # Split the input date string
+        date_obj = date.split('/')
+        return date_obj
+            
 
 
 def book_appointment(appointments): 
     screen_clear()
     while True:       
         date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
-        if not date.count('/') == 2:
-            print('invalid date format, please use dd/mm/yyyy format only')
-        else:
-        # Split the input date string
-            date_obj = date.split('/')
+        date_obj=date_validation(date)
+        if date_obj:
             break
+        # if not date.count('/') == 2:
+        #     print('invalid date format, please use dd/mm/yyyy format only')
+        # else:
+        # # Split the input date string
+        #     date_obj = date.split('/')
+        #     break
 
     while True: 
             if len(date_obj) == 3:
