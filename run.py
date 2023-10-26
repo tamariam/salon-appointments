@@ -70,16 +70,14 @@ def todays_appointments(appointments):
     back_to_menu()    
 
 def search_appointment(appointments):
-    screen_clear()
     while True :
         try:
             search_method=int(input('please mark one option below:\n 1)search appointment by date\n 2) search appointment by name\n'))
-            screen_clear()
+        except ValueError:
             print('please use only numbers ')
-            if search_method == 1:
-                screen_clear()
-                date =input('Please enter date(dd/mm/yyyy): ')  
-      
+            continue
+        if search_method == 1:
+            date =input('Please enter date(dd/mm/yyyy): ')  
             date_obj=date_validation(date)
             if date_obj:
                 appointments_date=[]
@@ -101,14 +99,40 @@ def search_appointment(appointments):
                                 print(' ivalid option please chosse 3 or 4')
                         except ValueError:
                             print('please use only numbers')
-                else:
-                    print('no appointmens found for the  specified date ') 
-        except ValueError:
-            print('bdbdbd')            
+        elif search_method == 2:
+            name_input=input('please enter name \n')
+            name=name_validator(name_input)
+            if name:
+                appointments_name = []
+                for appointment in appointments:
+                    if appointment['name']== name_input:
+                        appointments_name.append(appointment)
+                if appointments_name:
+                    print('appointments for specified name : \n ')
+                    show_appointment(appointments_name)
+                    while True:   
+                        try:
+                            user_click = int(input('click 3 to go back to main menu  or click 4 to stay on this page'))                            
+                            if user_click == 3:
+                                screen_clear()
+                                return appointments
+                            elif user_click == 4:
+                                break
+                            else:
+                                print(' ivalid option please chosse 3 or 4')
+                        except ValueError:
+                            print('please use only numbers')
+
+
+        else:
+            print('no appointmens found for the   specified name ') 
+        # except ValueError:
+        #     print('bdbdbd')            
 
         
     return appointments
-                               
+
+
 
 def back_to_menu():
      while True:
