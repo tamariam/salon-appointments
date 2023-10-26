@@ -72,10 +72,14 @@ def todays_appointments(appointments):
 def search_appointment(appointments):
     screen_clear()
     while True :
-        search_method=int(input('please mark one option below:\n 1)search appointment by date\n 2) search appointment by name\n'))
-        if search_method == 1:
+        try:
+            search_method=int(input('please mark one option below:\n 1)search appointment by date\n 2) search appointment by name\n'))
             screen_clear()
-            date =input('Please enter date(dd/mm/yyyy): ')  
+            print('please use only numbers ')
+            if search_method == 1:
+                screen_clear()
+                date =input('Please enter date(dd/mm/yyyy): ')  
+      
             date_obj=date_validation(date)
             if date_obj:
                 appointments_date=[]
@@ -86,17 +90,21 @@ def search_appointment(appointments):
                     print('appointments for specified date:')  
                     show_appointment(appointments_date)
                     while True:   
-                        user_click = int(input('click 3 to go back to main menu  or click 4 to stay on this page'))                            
-                        if user_click == 3:
-                            screen_clear()
-                            return appointments
-                        elif user_click == 4:
-                            break
-                        else:
-                            print(' ivalid option please chosse 3 or 4')
+                        try:
+                            user_click = int(input('click 3 to go back to main menu  or click 4 to stay on this page'))                            
+                            if user_click == 3:
+                                screen_clear()
+                                return appointments
+                            elif user_click == 4:
+                                break
+                            else:
+                                print(' ivalid option please chosse 3 or 4')
+                        except ValueError:
+                            print('please use only numbers')
                 else:
                     print('no appointmens found for the  specified date ') 
-                    
+        except ValueError:
+            print('bdbdbd')            
 
         
     return appointments
