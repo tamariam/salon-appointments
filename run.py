@@ -69,10 +69,12 @@ def todays_appointments(appointments):
 
     back_to_menu()    
 
-    # while True:
-    #     user_click=int(input('click 1 to go back to main menu '))
-    #     if user_click==1:
-    #         break
+def search_appointment(appointments):
+    while True :
+        search_method=int(input('please mark one option below:\n 1)search appointment by name\n 2) search appointment by date\n'))
+        if search_method == 1:
+            print('yes')
+        return appointments
                                
 
 def back_to_menu():
@@ -81,7 +83,7 @@ def back_to_menu():
             try:
                 if user_click==1:
                    screen_clear()
-                    break
+                   break
             except ValueError:
                 print('please enter 1 to  go back to main menu')
                 
@@ -169,11 +171,15 @@ def main_menu():
     while True:
         print('Welcome to the hair-beauty booking app')
         try:
-            user_choice = int(input('please select one option below \n1) book an appointment \n2) Todays appointments\n3) cacell appointment\n4) search appointment\n0) Quit \n '))
+            user_choice = int(input('please select one option below \n1) book an appointment \n2) Todays appointments\n3) search appointment\n4) cancell appointment\n0) Quit \n '))
             if user_choice == 1:
                 appointments=book_appointment(appointments)
             elif user_choice == 2:
                 todays_appointments(appointments)
+            elif user_choice == 3:
+                 search_appointment(appointments)
+            elif user_choice == 4:
+                 pass
             elif user_choice == 0:
                 screen_clear()
                 break
