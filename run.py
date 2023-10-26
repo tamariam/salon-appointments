@@ -70,11 +70,36 @@ def todays_appointments(appointments):
     back_to_menu()    
 
 def search_appointment(appointments):
+    screen_clear()
     while True :
-        search_method=int(input('please mark one option below:\n 1)search appointment by name\n 2) search appointment by date\n'))
+        search_method=int(input('please mark one option below:\n 1)search appointment by date\n 2) search appointment by name\n'))
         if search_method == 1:
-           pass
-        return appointments
+            screen_clear()
+            date =input('Please enter date(dd/mm/yyyy): ')  
+            date_obj=date_validation(date)
+            if date_obj:
+                appointments_date=[]
+                for appointment in appointments:
+                    if appointment['date']==date_obj.strftime('%d/%m/%Y'):
+                        appointments_date.append(appointment)
+                if appointments_date:
+                    print('appointments for specified date:')  
+                    show_appointment(appointments_date)
+                    while True:   
+                        user_click = int(input('click 3 to go back to main menu  or click 4 to stay on this page'))                            
+                        if user_click == 3:
+                            screen_clear()
+                            return appointments
+                        elif user_click == 4:
+                            break
+                        else:
+                            print(' ivalid option please chosse 3 or 4')
+                else:
+                    print('no appointmens found for the  specified date ') 
+                    
+
+        
+    return appointments
                                
 
 def back_to_menu():
@@ -90,9 +115,13 @@ def date_validation(date) :
     if not date.count('/') == 2:
             print('invalid date format, please use dd/mm/yyyy format only')
     else:
-        # Split the input date string
-        date_obj = date.split('/')
-        return date_obj
+         # Split the input date string
+        day,month,year=map(int,date.split('/'))
+        try:
+            date_obj = datetime(year,month,day).date()
+            return date_obj
+        except ValueError:
+            print('invalid date input')
             
 
 
@@ -103,16 +132,10 @@ def book_appointment(appointments):
         date_obj=date_validation(date)
         if date_obj:
             break
-        # if not date.count('/') == 2:
-        #     print('invalid date format, please use dd/mm/yyyy format only')
-        # else:
-        # # Split the input date string
-        #     date_obj = date.split('/')
-        #     break
 
     while True: 
             if len(date_obj) == 3:
-                day, month, year = map(int, date_obj)
+                day, month, year = map(int,date_obj)
                 current_year = datetime.now().year
                 today = datetime.now().date()
                 if 1 <= day <= 31 and 1 <= month <= 12  and year >= current_year:
@@ -187,7 +210,7 @@ def main_menu():
             elif user_choice == 2:
                 todays_appointments(appointments)
             elif user_choice == 3:
-                 search_appointment(appointments)
+                appointments=search_appointment(appointments)
             elif user_choice == 4:
                  pass
             elif user_choice == 0:
