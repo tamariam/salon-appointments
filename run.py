@@ -1,6 +1,3 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
 from datetime import datetime
 import json
 import os
@@ -148,7 +145,7 @@ def cancell_appointment(appointments):
             print('please enter valid name')
         else:
             
-        # name=name_validator(name_input)
+       
             date=input('enter date you want to cancell \n')
             date_obj=date_validation(date)
 
@@ -220,9 +217,14 @@ def book_appointment(appointments):
             correct_format_date = appointment_date.strftime('%d/%m/%Y')
             print(correct_format_date)
             if appointment_date < today:
+                screen_clear()
                 print('date is in past please enter  future or todays date ')
+                back_to_menu()
             elif appointment_date.weekday() in [5,6]:
+                screen_clear()
                 print('Please choose another option because we are closed on weekends')
+                back_to_menu()
+                
                 
             else:    
                 name=input('please enter your name ').strip() 
@@ -246,25 +248,30 @@ def book_appointment(appointments):
                                         with open('appointments.json', 'w') as file:
                                             json.dump(appointments, file)    
                                         just_booked(new_appointment)
-                                        # user_click = int(input('click 1 to go back to main menu '))
-                                
-                                        # if user_click == 1:
-                                        #     screen_clear()
+                                       
                                         back_to_menu()
                                             
                             else:
                                 print('invalid time option please choose  a valid one')
+                                
                         except ValueError:
-                            print('please enter only number for time option')            
+                            print('please enter only number for time option')     
+                                  
                 else:
-                    print('invalid name format, name should only include letters')        
+                    print('invalid name format, name should only include letters')     
+                       
             
         else:
-            print('Invalid date format. Please use valid dd/mm/yyyy format.')       
+            
+            print('Invalid date format. Please use valid dd/mm/yyyy format.')   
+                
     else:
+        
         print('Invalid date format. Please use valid dd/mm/yyyy format.')
+        
                     
     return appointments 
+    screen_clear()
                        
 def main_menu():
     screen_clear()
@@ -294,8 +301,7 @@ def main_menu():
             print('please use only numbers from 0 to 4')
                 
                   
-    # with open(FILE_PATH, 'w') as file:
-    #     json.dump(appointments,file)          
+           
                                     
 if  __name__=='__main__' :
       main_menu()    
