@@ -134,19 +134,32 @@ def search_appointment(appointments):
     return appointments
 
 
-def cancell_appointment(appointments, name, date):
-    name_to_cancell=input('please enter name')
+def cancell_appointment(appointments):
+    while True:
+        name=input('please enter name \n')
+        date=input('enter date you want to cancell \n')
+        date_obj=date_validation(date)
 
-    cancelled_appointments=[]
-    for appointment in appointments:
-        if appointment['date']==date and appointment['name'] == name:
-            cancelled_appointments.append(appointment)
-    if cancelled_appointments:
+        cancelled_appointments=[]
         for appointment in appointments:
-            appointments.remove(appointment)
-        print('your appointment has been cancelled')
-    else:
-        print('no appointment found')
+            if appointment['date']==date and appointment['name'] == name:
+                cancelled_appointments.append(appointment)
+                show_appointment(cancelled_appointments)
+        if cancelled_appointments:
+            for appointment in appointments:
+                appointments.remove(appointment)
+            with open(FILE_PATH, 'w') as file:
+                json.dump(appointments, file)
+            print('your appointment has been cancelled')
+            back_to_menu()
+            return appointments
+            
+        else:
+            print('no appointment found')
+            back_to_menu()
+            return appointments
+            
+
 
 def back_to_menu():
      while True:
@@ -256,7 +269,7 @@ def main_menu():
             elif user_choice == 3:
                 appointments=search_appointment(appointments)
             elif user_choice == 4:
-                 appointments=cancell_appointment(appointments,date, name)
+                appointments=cancell_appointment(appointments)
             elif user_choice == 0:
                 screen_clear()
                 break
