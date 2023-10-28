@@ -25,7 +25,7 @@ def booked_times(appointments,correct_format_date) :
 def name_validator(name) :
     name_word=name.split()
     for word in name_word:
-        if not word.isalpha():
+        if not all(char.isalpha() or char == '-' for char in word):
             return False
 
     return True   
@@ -52,7 +52,7 @@ def todays_appointments(appointments):
     screen_clear()
     today = datetime.now().date()
     correct_format_today = today.strftime('%d/%m/%Y')
-    print(today)
+  
     
     todays_bookings= []
     for appointment in appointments:
@@ -141,31 +141,36 @@ def search_appointment(appointments):
 
 
 def cancell_appointment(appointments):
+    screen_clear()
     while True:
         name=input('please enter name  \n')
-        # name=name_validator(name_input)
-        date=input('enter date you want to cancell \n')
-        date_obj=date_validation(date)
-
-        cancelled_appointments=[]
-        for appointment in appointments:
-            if appointment['date']==date and appointment['name'] == name:
-                cancelled_appointments.append(appointment)
-                show_appointment(cancelled_appointments)
-        if cancelled_appointments:
-            for appointment in appointments:
-                appointments.remove(appointment)
-            with open(FILE_PATH, 'w') as file:
-                json.dump(appointments, file)
-            print('your appointment has been cancelled')
-            back_to_menu()
-            return appointments
-            
+        if not name_validator(name):
+            print('please enter valid name')
         else:
-            print('no appointment found')
-            back_to_menu()
-            return appointments
             
+        # name=name_validator(name_input)
+            date=input('enter date you want to cancell \n')
+            date_obj=date_validation(date)
+
+            cancelled_appointments=[]
+            for appointment in appointments:
+                if appointment['date']==date and appointment['name'] == name:
+                    cancelled_appointments.append(appointment)
+                    show_appointment(cancelled_appointments)
+            if cancelled_appointments:
+                for appointment in appointments:
+                    appointments.remove(appointment)
+                with open(FILE_PATH, 'w') as file:
+                    json.dump(appointments, file)
+                print('your appointment has been cancelled')
+                back_to_menu()
+                return appointments
+                
+            else:
+                print('no appointment found')
+                back_to_menu()
+                return appointments
+                
 
 
 def back_to_menu():
