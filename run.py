@@ -71,10 +71,13 @@ def todays_appointments(appointments):
 def handle_to_user_click(appointments):
     while True:   
         try:
-            user_click = int(input('click 3 to go back to main menu  or click 4 to stay on this page'))                            
+            user_click = int(input('click 3 to go back to main menu  or click 4 to stay on this page'))  
+                                    
             if user_click == 3:
+                screen_clear() 
                 return True
             elif user_click == 4:
+                screen_clear() 
                 return False
             else:
                 print(' ivalid option please chosse 3 or 4')
@@ -82,9 +85,11 @@ def handle_to_user_click(appointments):
             print('please use only numbers')
     return appointments
 def search_appointment(appointments):
+    screen_clear()
     while True :
         try:
             search_method=int(input('please mark one option below:\n 1)search appointment by date\n 2) search appointment by name\n'))
+            screen_clear()
         except ValueError:
             print('please use only numbers ')
             continue
@@ -92,6 +97,7 @@ def search_appointment(appointments):
             date =input('Please enter date(dd/mm/yyyy): ')  
             date_obj=date_validation(date)
             if date_obj:
+                screen_clear()
                 appointments_date=[]
                 for appointment in appointments:
                     if appointment['date']==date_obj.strftime('%d/%m/%Y'):
@@ -136,7 +142,8 @@ def search_appointment(appointments):
 
 def cancell_appointment(appointments):
     while True:
-        name=input('please enter name \n')
+        name=input('please enter name  \n')
+        # name=name_validator(name_input)
         date=input('enter date you want to cancell \n')
         date_obj=date_validation(date)
 
@@ -184,6 +191,7 @@ def date_validation(date) :
             
 
 
+
 def book_appointment(appointments): 
     screen_clear()
     while True:       
@@ -224,6 +232,7 @@ def book_appointment(appointments):
                                 screen_clear()
                                 if time in booked_time:
                                     print(f'{time} on {correct_format_date}is already boooked,please try another time')
+                                    back_to_menu()
                                 else:
                                         new_appointment={'name': name, 'date' :correct_format_date, 'time' : time}
                                         print(f'your appointment has been booked for {correct_format_date} at {time} {name}, see you soon ')
@@ -232,10 +241,11 @@ def book_appointment(appointments):
                                         with open('appointments.json', 'w') as file:
                                             json.dump(appointments, file)    
                                         just_booked(new_appointment)
-                                        user_click = int(input('click 1 to go back to main menu '))
+                                        # user_click = int(input('click 1 to go back to main menu '))
                                 
-                                        if user_click == 1:
-                                            screen_clear()
+                                        # if user_click == 1:
+                                        #     screen_clear()
+                                        back_to_menu()
                                             
                             else:
                                 print('invalid time option please choose  a valid one')
