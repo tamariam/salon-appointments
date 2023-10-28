@@ -125,7 +125,7 @@ def search_appointment(appointments):
                         return appointments
                        
                 else:
-                    print('no appointments for specified date')
+                    print('no appointments for specified name')
                     if handle_to_user_click(appointments):
                         return appointments
                    
@@ -134,6 +134,19 @@ def search_appointment(appointments):
     return appointments
 
 
+def cancell_appointment(appointments, name, date):
+    name_to_cancell=input('please enter name')
+
+    cancelled_appointments=[]
+    for appointment in appointments:
+        if appointment['date']==date and appointment['name'] == name:
+            cancelled_appointments.append(appointment)
+    if cancelled_appointments:
+        for appointment in appointments:
+            appointments.remove(appointment)
+        print('your appointment has been cancelled')
+    else:
+        print('no appointment found')
 
 def back_to_menu():
      while True:
@@ -243,7 +256,7 @@ def main_menu():
             elif user_choice == 3:
                 appointments=search_appointment(appointments)
             elif user_choice == 4:
-                 pass
+                 appointments=cancell_appointment(appointments,date, name)
             elif user_choice == 0:
                 screen_clear()
                 break
