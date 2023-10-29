@@ -5,12 +5,16 @@ from datetime import datetime
 import json
 # import os to interact with operating system
 import os
- 
- FILE_PATH = 'appointments.json'
+# define file path for json file
+FILE_PATH = 'appointments.json'
+
+
 
 '''define function which will clear terminal screen screen for improving console output clarity.'''
 def screen_clear():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
 '''this function  checks if user pass correct time'''
 def time_validator(time_option):
     valid_options= [1,2,3,4,5,6]
@@ -27,12 +31,18 @@ def booked_times(appointments,correct_format_date) :
 
 '''this  function checks if the name is correctly formatted'''
 def name_validator(name) :
-    name_word=name.split()
-    for word in name_word:
-        if not all(char.isalpha() or char == '-' for char in word):
-            return False
-
-    return True   
+    while True:
+        name_word=name.split()
+        valid_name=True
+        for word in name_word:
+            if not all(char.isalpha() or char == '-' for char in word):
+                valid_name=False
+                break
+        if valid_name:
+            return True  
+        else:
+            print('invalid name format, name should only include letters') 
+            name = input('Please enter your name: ').strip()
 '''this function checks if user choice is a valid option'''
 def user_choice_validator(user_choice):
     user_options=[1,2,3,4,0]
@@ -138,7 +148,7 @@ def search_appointment(appointments):
                         return appointments
                        
                 else:
-                    print('no appointments for specified name')
+                    print('no appointments for specified name \n ')
                     if handle_to_user_click(appointments):
                         return appointments
                    
@@ -150,7 +160,7 @@ def search_appointment(appointments):
 def cancell_appointment(appointments):
     screen_clear()
     while True:
-        name=input('please enter name  you want to cancell \n')
+        name=input('please enter your  name  \n')
         screen_clear()
         if not name_validator(name):
             print('please enter valid name')
@@ -193,24 +203,27 @@ def back_to_menu():
                 print('please enter 1 to  go back to main menu')
 '''this functions validates and parse a date in dd/mm/yyyy format'''
 def date_validation(date) :
-    if not date.count('/') == 2:
-            print('invalid date format, please use dd/mm/yyyy format only')
-    else:
-         # Split the input date string
-        day,month,year=map(int,date.split('/'))
-        try:
-            date_obj = datetime(year,month,day).date()
-            return date_obj
-        except ValueError:
-            print('invalid date input')
-            
+    while True:
+        if not date.count('/') == 2:
+                screen_clear()
+                print('invalid date format, please use dd/mm/yyyy format only')
+        else:
+            # Split the input date string
+            day,month,year=map(int,date.split('/'))
+            try:
+                date_obj = datetime(year,month,day).date()
+                return date_obj
+            except ValueError:
+                screen_clear()
+                print('invalid date input')
+        date = input('Please enter the date (dd/mm/yyyy): ')
 
 
 ''' this function allows user to book an appointment by specifying name date  and time'''
 def book_appointment(appointments): 
     screen_clear()
     while True:       
-        date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
+        date =input('Please let us know when you want to book an appointment (dd/mm/yyyy): ')  
         screen_clear()
         date_obj=date_validation(date)
         if date_obj:
@@ -231,7 +244,7 @@ def book_appointment(appointments):
             correct_format_date = appointment_date.strftime('%d/%m/%Y')
             if appointment_date < today:
                 screen_clear()
-                print('date is in past please enter  future or todays date ')
+                print('date is in past, please enter  future or todays date ')
                 back_to_menu()
             elif appointment_date.weekday() in [5,6]:
                 screen_clear()
