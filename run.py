@@ -1,5 +1,9 @@
+'''import modules to set up initial enviroment for project '''
+#import datetime class from datetime module to work with dates
 from datetime import datetime
+#import json to read and write data
 import json
+# import os to interact with operating system
 import os
  
 def screen_clear():
