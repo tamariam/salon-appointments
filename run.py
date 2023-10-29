@@ -19,15 +19,7 @@ def screen_clear():
 def time_validator(time_option):
     valid_options= [1,2,3,4,5,6]
     return time_option in valid_options  
-'''
-    This function searches through a list of appointments to find all the booked times
-    for a specified date in the correct date format. '''
-def booked_times(appointments,correct_format_date) :
-    booked_times=[]
-    for appointment in appointments:
-        if appointment['date']== correct_format_date:
-            booked_times.append(appointment['time'])
-    return booked_times       
+    
 
 '''this  function checks if the name is correctly formatted'''
 def name_validator(name) :
@@ -47,7 +39,40 @@ def name_validator(name) :
 def user_choice_validator(user_choice):
     user_options=[1,2,3,4,0]
     return user_choice in user_options  
-
+''' this function allow user to return to main menu by clicking 1'''
+def back_to_menu():
+     while True:
+            user_click=int(input('click 1 to go back to main menu '))
+            try:
+                if user_click==1:
+                   screen_clear()
+                   break
+            except ValueError:
+                print('please enter 1 to  go back to main menu')
+'''this functions validates and parse a date in dd/mm/yyyy format'''
+def date_validation(date) :
+    while True:
+        if not date.count('/') == 2:
+                screen_clear()
+                print('invalid date format, please use dd/mm/yyyy format only')
+        else:
+            # Split the input date string
+            day,month,year=map(int,date.split('/'))
+            try:
+                date_obj = datetime(year,month,day).date()
+                return date_obj
+            except ValueError:
+                screen_clear()
+                print('invalid date input')
+        date = input('Please enter the date (dd/mm/yyyy): ')
+'''This function searches through a list of appointments to find all the booked times
+    for a specified date in the correct date format. '''
+def booked_times(appointments,correct_format_date) :
+    booked_times=[]
+    for appointment in appointments:
+        if appointment['date']== correct_format_date:
+            booked_times.append(appointment['time'])
+    return booked_times   
 '''this function prints appointment details '''
 def show_appointment(appointments) :
     print('\n appointments')
@@ -191,32 +216,7 @@ def cancell_appointment(appointments):
                 return appointments
                 
 
-''' this function allow user to return to main menu by clicking 1'''
-def back_to_menu():
-     while True:
-            user_click=int(input('click 1 to go back to main menu '))
-            try:
-                if user_click==1:
-                   screen_clear()
-                   break
-            except ValueError:
-                print('please enter 1 to  go back to main menu')
-'''this functions validates and parse a date in dd/mm/yyyy format'''
-def date_validation(date) :
-    while True:
-        if not date.count('/') == 2:
-                screen_clear()
-                print('invalid date format, please use dd/mm/yyyy format only')
-        else:
-            # Split the input date string
-            day,month,year=map(int,date.split('/'))
-            try:
-                date_obj = datetime(year,month,day).date()
-                return date_obj
-            except ValueError:
-                screen_clear()
-                print('invalid date input')
-        date = input('Please enter the date (dd/mm/yyyy): ')
+
 
 
 ''' this function allows user to book an appointment by specifying name date  and time'''
@@ -228,7 +228,6 @@ def book_appointment(appointments):
         date_obj=date_validation(date)
         if date_obj:
             break
-
     day, month, year = date_obj.day, date_obj.month, date_obj.year
     current_year = datetime.now().year
     today = datetime.now().date()
@@ -275,17 +274,16 @@ def book_appointment(appointments):
                                         with open('appointments.json', 'w') as file:
                                             json.dump(appointments, file)    
                                         just_booked(new_appointment)
-                                       
+                                    
                                         back_to_menu()           
                             else:
                                 print('invalid time option please choose  a valid one')
                                 
                         except ValueError:
                             print('please enter only number for time option')     
-                                  
+                                
                 else:
-                    print('invalid name format, name should only include letters')     
-                       
+                    print('invalid name format, name should only include letters')           
             
         else:
             
@@ -295,7 +293,7 @@ def book_appointment(appointments):
         
         print('Invalid date format. Please use valid dd/mm/yyyy format.')
         
-                    
+                        
     return appointments 
     screen_clear()
 ''' this is main menu function which is responsible to display main menu and let user to chooose one option '''                  
