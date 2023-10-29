@@ -68,12 +68,12 @@ def todays_appointments(appointments):
 def handle_to_user_click(appointments):
     while True:   
         try:
-            user_click = int(input('click 3 to go back to main menu  or click 4 to stay on this page'))  
+            user_click = int(input('click 1 to go back to main menu  or click 2 to stay on this page'))  
                                     
-            if user_click == 3:
+            if user_click == 1:
                 screen_clear() 
                 return True
-            elif user_click == 4:
+            elif user_click == 2:
                 screen_clear() 
                 return False
             else:
@@ -140,13 +140,15 @@ def search_appointment(appointments):
 def cancell_appointment(appointments):
     screen_clear()
     while True:
-        name=input('please enter name  \n')
+        name=input('please enter name  you want to cancell \n')
+        screen_clear()
         if not name_validator(name):
             print('please enter valid name')
         else:
             
        
             date=input('enter date you want to cancell \n')
+            screen_clear()
             date_obj=date_validation(date)
 
             cancelled_appointments=[]
@@ -198,6 +200,7 @@ def book_appointment(appointments):
     screen_clear()
     while True:       
         date =input('Please let us know when you want an appointment (dd/mm/yyyy): ')  
+        screen_clear()
         date_obj=date_validation(date)
         if date_obj:
             break
@@ -215,7 +218,6 @@ def book_appointment(appointments):
         if 1 <= day <= max_day :        
             appointment_date = datetime(year, month, day).date()
             correct_format_date = appointment_date.strftime('%d/%m/%Y')
-            print(correct_format_date)
             if appointment_date < today:
                 screen_clear()
                 print('date is in past please enter  future or todays date ')
@@ -227,7 +229,8 @@ def book_appointment(appointments):
                 
                 
             else:    
-                name=input('please enter your name ').strip() 
+                name=input('please enter your name \n').strip() 
+                screen_clear()
                 if name_validator(name):
                         try:
                             time_options=int(input('plese choose one option below\n1) 09:00\n2) 10:00\n3) 11:00\n4) 12:00\n5) 14:00\n6) 15:00\n'))
@@ -296,12 +299,14 @@ def main_menu():
                 screen_clear()
                 break
             else:
+                screen_clear()
                 print('Invalid input. Please select a valid option.') 
         except ValueError:
+            screen_clear()
             print('please use only numbers from 0 to 4')
-                
-                  
-           
+            
                                     
 if  __name__=='__main__' :
-      main_menu()    
+    main_menu()           
+            
+                
