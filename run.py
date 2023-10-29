@@ -6,15 +6,18 @@ import json
 # import os to interact with operating system
 import os
  
+ FILE_PATH = 'appointments.json'
+
+'''define function which will clear terminal screen screen for improving console output clarity.'''
 def screen_clear():
     os.system('cls' if os.name == 'nt' else 'clear')
-
-FILE_PATH = 'appointments.json'
-
-
+'''this function  checks if user pass correct time'''
 def time_validator(time_option):
     valid_options= [1,2,3,4,5,6]
     return time_option in valid_options  
+'''
+    This function searches through a list of appointments to find all the booked times
+    for a specified date in the correct date format. '''
 def booked_times(appointments,correct_format_date) :
     booked_times=[]
     for appointment in appointments:
@@ -22,7 +25,7 @@ def booked_times(appointments,correct_format_date) :
             booked_times.append(appointment['time'])
     return booked_times       
 
-
+'''this  function checks if the name is correctly formatted'''
 def name_validator(name) :
     name_word=name.split()
     for word in name_word:
@@ -30,17 +33,19 @@ def name_validator(name) :
             return False
 
     return True   
-  
+'''this function checks if user choice is a valid option'''
 def user_choice_validator(user_choice):
     user_options=[1,2,3,4,0]
     return user_choice in user_options  
 
+'''this function prints appointment details '''
 def show_appointment(appointments) :
     print('\n appointments')
     print('Name\t\tDate\t\tTime')
     print('-' *50)
     for appointment in appointments :
         print(f'{appointment["name"]}\t\t{appointment["date"]}\t\t{appointment["time"]}')
+'''this function  displays latest appointment information,it checks if new appointment is dictionery or not, if it is dictionery takes keys and its values from there if not just prints new_appointment'''
 def just_booked(new_appointment):
     if isinstance(new_appointment, dict):
         print(f'Name: {new_appointment.get("name", "N/A")}')
@@ -48,7 +53,7 @@ def just_booked(new_appointment):
         print(f'Time: {new_appointment.get("time", "N/A")}')
     else:
         print(new_appointment)
-
+'''this function checks if there is or not appointments booked for today, if there is it displays appointment details, if not simply says that there is no appointments booked for today '''
 def todays_appointments(appointments):
     screen_clear()
     today = datetime.now().date()
@@ -68,7 +73,7 @@ def todays_appointments(appointments):
         
 
     back_to_menu()    
-
+'''define this function to handle user to navigate between search appointments and main menu'''
 def handle_to_user_click(appointments):
     while True:   
         try:
@@ -85,6 +90,7 @@ def handle_to_user_click(appointments):
         except ValueError:
             print('please use only numbers')
     return appointments
+''' search appointment function  help user to search appointments by name or by date,if specified appointment exists it displays on screen if not simply says there is no appointments for specified  date(or name)'''
 def search_appointment(appointments):
     screen_clear()
     while True :
@@ -140,7 +146,7 @@ def search_appointment(appointments):
 
     return appointments
 
-
+''' Allow the user to cancel an appointment by providing name and date.'''
 def cancell_appointment(appointments):
     screen_clear()
     while True:
@@ -175,7 +181,7 @@ def cancell_appointment(appointments):
                 return appointments
                 
 
-
+''' this function allow user to return to main menu by clicking 1'''
 def back_to_menu():
      while True:
             user_click=int(input('click 1 to go back to main menu '))
@@ -185,6 +191,7 @@ def back_to_menu():
                    break
             except ValueError:
                 print('please enter 1 to  go back to main menu')
+'''this functions validates and parse a date in dd/mm/yyyy format'''
 def date_validation(date) :
     if not date.count('/') == 2:
             print('invalid date format, please use dd/mm/yyyy format only')
@@ -199,7 +206,7 @@ def date_validation(date) :
             
 
 
-
+''' this function allows user to book an appointment by specifying name date  and time'''
 def book_appointment(appointments): 
     screen_clear()
     while True:       
@@ -256,8 +263,7 @@ def book_appointment(appointments):
                                             json.dump(appointments, file)    
                                         just_booked(new_appointment)
                                        
-                                        back_to_menu()
-                                            
+                                        back_to_menu()           
                             else:
                                 print('invalid time option please choose  a valid one')
                                 
@@ -279,7 +285,7 @@ def book_appointment(appointments):
                     
     return appointments 
     screen_clear()
-                       
+''' this is main menu function which is responsible to display main menu and let user to chooose one option '''                  
 def main_menu():
     screen_clear()
     try:
@@ -311,6 +317,7 @@ def main_menu():
             
                                     
 if  __name__=='__main__' :
+    # call the main menu function to start application
     main_menu()           
             
                 
