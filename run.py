@@ -39,16 +39,7 @@ def name_validator(name) :
 def user_choice_validator(user_choice):
     user_options=[1,2,3,4,0]
     return user_choice in user_options  
-''' this function allow user to return to main menu by clicking 1'''
-def back_to_menu():
-     while True:
-            user_click=int(input('click 1 to go back to main menu '))
-            try:
-                if user_click==1:
-                   screen_clear()
-                   break
-            except ValueError:
-                print('please enter 1 to  go back to main menu')
+
 '''this functions validates and parse a date in dd/mm/yyyy format'''
 def date_validation(date) :
     while True:
@@ -108,6 +99,16 @@ def todays_appointments(appointments):
         
 
     back_to_menu()    
+''' this function allow user to return to main menu by clicking 1'''
+def back_to_menu():
+     while True:
+            user_click=int(input('click 1 to go back to main menu '))
+            try:
+                if user_click==1:
+                   screen_clear()
+                   break
+            except ValueError:
+                print('please enter 1 to  go back to main menu')
 '''define this function to handle user to navigate between search appointments and main menu'''
 def handle_to_user_click(appointments):
     while True:   
