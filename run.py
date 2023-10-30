@@ -19,6 +19,7 @@ def screen_clear():
 
 
 def time_validator(time_option):
+    screen_clear()
     valid_options = [1, 2, 3, 4, 5, 6]
     return time_option in valid_options
 
@@ -27,6 +28,7 @@ def time_validator(time_option):
 
 
 def name_validator(name):
+    screen_clear()
     while True:
         name_word = name.split()
         valid_name = True
@@ -336,8 +338,10 @@ def book_appointment(appointments):
                         else:
                             print('invalid time option'
                                   'please choose  a valid one')
+                            back_to_menu()
                     except ValueError:
                         print('please enter only number for time option')
+                        back_to_menu()
                 else:
                     print('invalid name format,'
                           'name should only include letters')
