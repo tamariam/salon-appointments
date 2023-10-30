@@ -67,11 +67,10 @@ def date_validation(date):
                 screen_clear()
                 print('invalid date input')
         date = input('Please enter the date (dd/mm/yyyy): ')
-        screen_clear()
 
 
-'''This function searches through a list
-of appointments to find all the booked times
+'''This function searches through
+a list of appointments to find all the booked times
     for a specified date in the correct date format. '''
 
 
@@ -91,14 +90,17 @@ def show_appointment(appointments):
     print('Name\t\tDate\t\tTime')
     print('-' * 50)
     for appointment in appointments:
-        print(f'{appointment["name"]}\
-        t\t{appointment["date"]}\t\t{appointment["time"]}')
+        print(
+            f'{appointment["name"]}\t\t'
+            f'{appointment["date"]}\t\t'
+            f'{appointment["time"]}'
+        )
 
 
-'''this function  displays latest appointment information,it checks if
-new appointment is dictionery or not,
-if it is dictionery takes keys
-and its values from there if not just prints new_appointment'''
+'''this function  displays latest appointment
+information,it checks if new appointment is dictionery or not,
+if it is dictionery takes keys and its values
+from there if not just prints new_appointment'''
 
 
 def just_booked(new_appointment):
@@ -110,8 +112,8 @@ def just_booked(new_appointment):
         print(new_appointment)
 
 
-'''this function checks if there is or not appointments booked for today,
-if there is it displays appointment details,
+'''this function checks if there is or not
+appointments booked for today, if there is it displays appointment details,
 if not simply says that there is no appointments booked for today '''
 
 
@@ -126,7 +128,6 @@ def todays_appointments(appointments):
     if todays_bookings:
         print('todays appointments: ')
         show_appointment(todays_bookings)
-        print(todays_bookings)
     else:
         print('no appointments booked for today')
     back_to_menu()
@@ -146,15 +147,15 @@ def back_to_menu():
             print('please enter 1 to  go back to main menu')
 
 
-'''define this function to handle user
-to navigate between search appointments and main menu'''
+'''define this function to handle user to
+navigate between search appointments and main menu'''
 
 
 def handle_to_user_click(appointments):
     while True:
         try:
-            user_click = int(input('click 1 to go back to main'
-                             'menu or click 2 to stay on this page'))
+            user_click = int(input('Click 1 to go back to the main menu '
+                                   'or click 2 to stay on this page: '))
             if user_click == 1:
                 screen_clear()
                 return True
@@ -168,26 +169,25 @@ def handle_to_user_click(appointments):
     return appointments
 
 
-''' search appointment function  help user to
-search appointments by name or by date,
-if specified appointment exists it displays
-on screen if not simply says
-there is no appointments for specified  date(or name)'''
+''' search appointment function  help user
+to search appointments by name or by date,
+if specified appointment exists it displays on screen
+if not simply says there is no appointments for specified  date(or name)'''
 
 
 def search_appointment(appointments):
     screen_clear()
     while True:
         try:
-            search_method = int(input('please mark one option below:\n '
-                                      '1)search appointment by date\n '
-                                      '2) search appointment by name\n'))
+            search_method = int(input('Please mark one option below:\n'
+                                      '1) Search appointment by date\n'
+                                      '2) Search appointment by name\n'))
             screen_clear()
         except ValueError:
             print('please use only numbers ')
             continue
         if search_method == 1:
-            date = input('Please enter date(dd/mm/yyyy): /n')
+            date = input('Please enter date(dd/mm/yyyy): ')
             date_obj = date_validation(date)
             if date_obj:
                 screen_clear()
@@ -196,7 +196,7 @@ def search_appointment(appointments):
                     if appointment['date'] == date_obj.strftime('%d/%m/%Y'):
                         appointments_date.append(appointment)
                 if appointments_date:
-                    print('appointments for specified date: ')
+                    print('appointments for specified date:')
                     show_appointment(appointments_date)
                     if handle_to_user_click(appointments):
                         return appointments
@@ -237,7 +237,7 @@ def cancell_appointment(appointments):
         else:
             date = input('enter date you want to cancell \n')
             screen_clear()
-            date_obj = date_validation(date)
+            date_validation(date)
             cancelled_appointments = []
             for appointment in appointments:
                 if appointment['date'] == date and appointment['name'] == name:
@@ -257,15 +257,15 @@ def cancell_appointment(appointments):
                 return appointments
 
 
-''' this function allows user to book an appointment
-by specifying name date  and time'''
+''' this function allows user to book
+an appointment by specifying name date  and time'''
 
 
 def book_appointment(appointments):
     screen_clear()
     while True:
-        date = input('Please let us know when you want '
-                     'to book an appointment (dd/mm/yyyy): ')
+        date = input('Please let us know when you want to book an appointment '
+                     '(dd/mm/yyyy): ')
         screen_clear()
         date_obj = date_validation(date)
         if date_obj:
@@ -289,58 +289,57 @@ def book_appointment(appointments):
                 back_to_menu()
             elif appointment_date.weekday() in [5, 6]:
                 screen_clear()
-                print('Please choose another option'
-                      'because we are closed on weekends')
+                print('Please choose another option because we are closed '
+                      'on weekends')
                 back_to_menu()
             else:
                 name = input('please enter your name \n').strip()
                 screen_clear()
                 if name_validator(name):
                     try:
-                        time_options =
-                        int(input('Please choose one option below:\n'
-                                  '1) 09:00\n'
-                                  '2) 10:00\n'
-                                  '3) 11:00\n'
-                                  '4) 12:00\n'
-                                  '5) 14:00\n'
-                                  '6) 15:00\n'))
+                        time_options = int(input('Please choose '
+                                                 'one option below\n'
+                                                 '1) 09:00\n'
+                                                 '2) 10:00\n'
+                                                 '3) 11:00\n'
+                                                 '4) 12:00\n'
+                                                 '5) 14:00\n'
+                                                 '6) 15:00\n'))
                         if time_validator(time_options):
-                            time_availabilities = [
-                                '09:00', '10:00',
-                                '11:00', '12:00', '14:00', '15:00'
+                            time_availibilities = [
+                                '09:00', '10:00', '11:00',
+                                '12:00', '14:00', '15:00'
                                 ]
                             time = time_availibilities[time_options-1]
-                            booked_time = booked_times(appointments,
-                                                       correct_format_date)
+                            booked_time = booked_times(
+                             appointments, correct_format_date)
                             screen_clear()
                             if time in booked_time:
-                                print(f'{time} on {correct_format_date}is'
-                                      'already boooked,'
+                                print(f'{time} on {correct_format_date}'
+                                      'is already booked,'
                                       'please try another time')
                                 back_to_menu()
-                                else:
-                                    new_appointment = {'name': name,
-                                                       'date':
-                                                           correct_format_date,
-                                                       'time': time}
-                                    print(f'your appointment has'
-                                          'been booked for'
-                                          '{correct_format_date}'
-                                          'at {time} {name}, see you soon ')
-                                    appointments.append(new_appointment)
-                                    with open('appointments.json', 'w')
-                                    as file:
-                                        json.dump(appointments, file)
-                                    just_booked(new_appointment)
-                                    back_to_menu()
                             else:
-                                print('invalid time option
-                                      'please choose  a valid one')
-                        except ValueError:
-                            print('please enter only number for time option')
+                                new_appointment = {
+                                    'name': name,
+                                    'date': correct_format_date,
+                                    'time': time
+                                }
+                                print(f'Your appointment has been booked for '
+                                      f'{correct_format_date} at {time} '
+                                      f'{name}, see you soon')
+                                appointments.append(new_appointment)
+                                with open('appointments.json', 'w') as file:
+                                    json.dump(appointments, file)
+                                just_booked(new_appointment)
+                                back_to_menu()
+                        else:
+                            print('invalid time option'
+                                  'please choose  a valid one')
+                    except ValueError:
+                        print('please enter only number for time option')
                 else:
-                    print('invalid name format,
+                    print('invalid name format,'
                           'name should only include letters')
         else:
             print('Invalid date format. Please use valid dd/mm/yyyy format.')
@@ -350,8 +349,9 @@ def book_appointment(appointments):
     screen_clear()
 
 
-''' this is main menu function which is
-responsible to display main menu and let user to chooose one option'''
+''' this is main menu function which
+is responsible to display main menu
+and let user to chooose one option '''
 
 
 def main_menu():
@@ -364,12 +364,14 @@ def main_menu():
     while True:
         print('Welcome to the hair-beauty booking app')
         try:
-            user_choice = int(input('please select one option below'
-                                    '\n1) book an appointment \n'
-                                    '2) Todays appointments\n'
-                                    '3) search appointment\n'
-                                    '4) cancell appointment\n'
-                                    '0) Quit \n '))
+            user_choice = int(input(
+                                'please select one option below \n'
+                                '1) book an appointment \n'
+                                '2) Todays appointments\n'
+                                '3) search appointment\n'
+                                '4) cancell appointment\n'
+                                '0) Quit \n '
+                                ))
             if user_choice == 1:
                 appointments = book_appointment(appointments)
             elif user_choice == 2:
