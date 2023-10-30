@@ -140,7 +140,7 @@ def todays_appointments(appointments):
 
 def back_to_menu():
     while True:
-        user_click = int(input('click 1 to go back to main menu '))
+        user_click = int(input('click 1 to go back to main menu \n'))
         try:
             if user_click == 1:
                 screen_clear()
@@ -157,7 +157,7 @@ def handle_to_user_click(appointments):
     while True:
         try:
             user_click = int(input('Click 1 to go back to the main menu '
-                                   'or click 2 to stay on this page: '))
+                                   'or click 2 to stay on this page: \n'))
             if user_click == 1:
                 screen_clear()
                 return True
@@ -189,7 +189,7 @@ def search_appointment(appointments):
             print('please use only numbers ')
             continue
         if search_method == 1:
-            date = input('Please enter date(dd/mm/yyyy): ')
+            date = input('Please enter date(dd/mm/yyyy): \n')
             date_obj = date_validation(date)
             if date_obj:
                 screen_clear()
@@ -232,13 +232,13 @@ def search_appointment(appointments):
 def cancell_appointment(appointments):
     screen_clear()
     while True:
-        name = input('Please enter your name: ')
+        name = input('Please enter your  name:\n ')
         screen_clear()
         if not name_validator(name):
             print('Invalid name format. Please enter a valid name.')
         else:
             date = input('Enter the date of the appointment'
-                         'you want to cancel (dd/mm/yyyy): ')
+                         'you want to cancel (dd/mm/yyyy): \n ')
             screen_clear()
             date_obj = date_validation(date)
             if date_obj:
@@ -392,7 +392,7 @@ def main_menu():
                 appointments = cancell_appointment(appointments)
             elif user_choice == 0:
                 screen_clear()
-                print('Good Bye')
+                print('GoodBye')
                 break
             else:
                 screen_clear()

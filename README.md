@@ -5,7 +5,7 @@
 
 ## introduction
 salon-appointments is python terminal app,which runs on a mock terminal in Heroku.The program is aimed at helping a salon manage patient appointments.This app provides a user-friendly and convenient way to handle appointment bookings and updates.
-here is link of live[link](https://salon-appointments-6179b752c1c9.herokuapp.com/?fbclid=IwAR2x-9_64jEAfkuD--ZYmFj9lUsE7TI0OsEsGUH8_Jiw3SymieOm-HKvgko).
+Here is live[link](https://salon-appointments-6179b752c1c9.herokuapp.com/?fbclid=IwAR2x-9_64jEAfkuD--ZYmFj9lUsE7TI0OsEsGUH8_Jiw3SymieOm-HKvgko).
 
 
 ## Purpose
@@ -46,3 +46,14 @@ As shown in the image above, the first option is 'Book Appointment.' When the us
 ![no-available!](/views/assets/images/no-avability.png)
 - After successfully booking an appointment, the user will see the message displayed in the image below.
 ![appointment-booked!](/views/assets/images/appointment%20booked.png)
+### Todays appointments
+If the user selects the second option from the main menu, they will navigate to the 'Today's Appointments' page. If appointments are booked for today, they will be displayed in the terminal; otherwise, an appropriate message will be shown.
+![todays-appointments](/views/assets/images/todays-appointments.png)
+![no-appointments-for-today!](/views/assets/images/today-no-appointments.png)
+### Search appointments
+After choosing the third option, the user can search for appointments by date or by name. Validations are in place for both date and name inputs, so if the user enters an invalid name or date format, they will be notified. If there are no appointments for the specified date, the user will receive a message to that effect. If appointments exist, the user can view their details.
+![search-appointment!](/views/assets/images/search-appointment.png)
+### cancell appointment
+The Salon Appointments app allows users to cancel appointments. To cancel an appointment, the user should enter the name and date. If an appointment is booked for the specified date and name, it will be canceled. If no appointment exists with the provided details, the user will receive a message displayed on the screen.
+![cancelled-appointment!](/views/assets/images/cancell-appointment%20.png)
+
