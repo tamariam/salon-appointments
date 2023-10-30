@@ -58,7 +58,7 @@ def date_validation(date):
     while True:
         if not date.count('/') == 2:
             screen_clear()
-            print('invalid date format, please use dd/mm/yyyy format only')
+            print('invalid date format, please use dd/mm/yyyy format only \n')
         else:
             # Split the input date string
             day, month, year = map(int, date.split('/'))
@@ -68,7 +68,7 @@ def date_validation(date):
             except ValueError:
                 screen_clear()
                 print('invalid date input')
-        date = input('Please enter the date (dd/mm/yyyy): ')
+        date = input('Please enter the date (dd/mm/yyyy): \n ')
 
 
 '''This function searches through
@@ -232,29 +232,32 @@ def search_appointment(appointments):
 def cancell_appointment(appointments):
     screen_clear()
     while True:
-        name = input('please enter your  name  \n')
+        name = input('Please enter your name: ')
         screen_clear()
         if not name_validator(name):
-            print('please enter valid name')
+            print('Invalid name format. Please enter a valid name.')
         else:
-            date = input('enter date you want to cancell \n')
+            date = input('Enter the date of the appointment you want to cancel (dd/mm/yyyy): ')
             screen_clear()
-            date_validation(date)
-            cancelled_appointments = []
-            for appointment in appointments:
-                if appointment['date'] == date and appointment['name'] == name:
-                    cancelled_appointments.append(appointment)
-                    show_appointment(cancelled_appointments)
-            if cancelled_appointments:
+            date_obj = date_validation(date)
+            if date_obj:
+                appointment_to_cancel = None
                 for appointment in appointments:
-                    appointments.remove(appointment)
-                with open(FILE_PATH, 'w') as file:
-                    json.dump(appointments, file)
-                print('your appointment has been cancelled')
+                    if appointment['date'] == date_obj.strftime('%d/%m/%Y') and appointment['name'] == name:
+                        appointment_to_cancel = appointment
+                        break  # Found the appointment to cancel, exit the loop
+                if appointment_to_cancel:
+                    appointments.remove(appointment_to_cancel)
+                    with open(FILE_PATH, 'w') as file:
+                        json.dump(appointments, file)
+                    print('Your appointment has been canceled.')
+                    show_appointment([appointment_to_cancel])  # Show the canceled appointment details
+                else:
+                    print('No appointment found for the specified name and date.')
                 back_to_menu()
                 return appointments
             else:
-                print('no appointment found')
+                print('Invalid date format. Please use dd/mm/yyyy format.')
                 back_to_menu()
                 return appointments
 
@@ -267,7 +270,7 @@ def book_appointment(appointments):
     screen_clear()
     while True:
         date = input('Please let us know when you want to book an appointment '
-                     '(dd/mm/yyyy): ')
+                     '(dd/mm/yyyy): \n')
         screen_clear()
         date_obj = date_validation(date)
         if date_obj:
@@ -300,7 +303,7 @@ def book_appointment(appointments):
                 if name_validator(name):
                     try:
                         time_options = int(input('Please choose '
-                                                 'one option below\n'
+                                                 'one option below \n  '
                                                  '1) 09:00\n'
                                                  '2) 10:00\n'
                                                  '3) 11:00\n'
@@ -340,7 +343,8 @@ def book_appointment(appointments):
                                   'please choose  a valid one')
                             back_to_menu()
                     except ValueError:
-                        print('please enter only number for time option')
+                        print('please enter only number from '
+                              '1 to 6 for time option')
                         back_to_menu()
                 else:
                     print('invalid name format,'
@@ -366,7 +370,7 @@ def main_menu():
     except (FileNotFoundError, json.JSONDecodeError):
         appointments = []
     while True:
-        print('Welcome to the hair-beauty booking app')
+        print('Welcome to the hair-beauty booking app \n')
         try:
             user_choice = int(input(
                                 'please select one option below \n'
@@ -386,6 +390,7 @@ def main_menu():
                 appointments = cancell_appointment(appointments)
             elif user_choice == 0:
                 screen_clear()
+                print('Good Bye')
                 break
             else:
                 screen_clear()
