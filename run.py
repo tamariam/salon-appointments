@@ -237,7 +237,8 @@ def cancell_appointment(appointments):
         if not name_validator(name):
             print('Invalid name format. Please enter a valid name.')
         else:
-            date = input('Enter the date of the appointment you want to cancel (dd/mm/yyyy): ')
+            date = input('Enter the date of the appointment'
+                         'you want to cancel (dd/mm/yyyy): ')
             screen_clear()
             date_obj = date_validation(date)
             if date_obj:
@@ -245,15 +246,16 @@ def cancell_appointment(appointments):
                 for appointment in appointments:
                     if appointment['date'] == date_obj.strftime('%d/%m/%Y') and appointment['name'] == name:
                         appointment_to_cancel = appointment
-                        break  # Found the appointment to cancel, exit the loop
+                        break
                 if appointment_to_cancel:
                     appointments.remove(appointment_to_cancel)
                     with open(FILE_PATH, 'w') as file:
                         json.dump(appointments, file)
                     print('Your appointment has been canceled.')
-                    show_appointment([appointment_to_cancel])  # Show the canceled appointment details
+                    show_appointment([appointment_to_cancel])
                 else:
-                    print('No appointment found for the specified name and date.')
+                    print('No appointment found for '
+                          ' the specified name and date.')
                 back_to_menu()
                 return appointments
             else:
