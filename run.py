@@ -244,7 +244,11 @@ def cancell_appointment(appointments):
             if date_obj:
                 appointment_to_cancel = None
                 for appointment in appointments:
-                    if appointment['date'] == date_obj.strftime('%d/%m/%Y') and appointment['name'] == name:
+                    if appointment[
+                        'date'
+                        ] == date_obj.strftime(
+                            '%d/%m/%Y'
+                            ) and appointment['name'] == name:
                         appointment_to_cancel = appointment
                         break
                 if appointment_to_cancel:
