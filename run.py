@@ -99,9 +99,6 @@ from there if not just prints new_appointment"""
         print(new_appointment)
 
 
-
-
-
 def todays_appointments(appointments):
     """this function checks if there is or not
 appointments booked for today, if there is it displays appointment details,
