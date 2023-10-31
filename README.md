@@ -62,10 +62,15 @@ As shown in the image above, the first option is 'Book Appointment.' When the us
 
 ![no-available!](/docs/assets/images/no-avability.png)
 
+- If the user enters a weekend date, the system will notify that the salon is closed on weekends.
+
+![weekends!](/docs/images/weekend.png)
+
 - After successfully booking an appointment, the user will see the message displayed in the image below.
 
 ![appointment-booked!](/docs/assets/images/appointment%20booked.png)
 
+ 
 ### Todays appointments
 
 If the user selects the second option from the main menu, they will navigate to the 'Today's Appointments' page. If appointments are booked for today, they will be displayed in the terminal; otherwise, an appropriate message will be shown.
@@ -80,7 +85,7 @@ After choosing the third option, the user can search for appointments by date or
 
 ![search-appointment!](/docss/assets/images/search-appointment.png)
 
-### cancell appointment
+### cancel appointment
 
 The Salon Appointments app allows users to cancel appointments. To cancel an appointment, the user should enter the name and date. If an appointment is booked for the specified date and name, it will be canceled. If no appointment exists with the provided details, the user will receive a message displayed on the screen.
 ![cancelled-appointment!](/docs/assets/images/cancell-appointment%20.png)
@@ -114,6 +119,13 @@ The 'Cancel Appointment' option did not work as expected. It correctly displayed
 
 There is no unfixed bugs.
 
+### Data Storage
+In my project, I use a JSON file named "appointment.json" for storing and managing appointment data. This structured JSON file facilitates efficient access and manipulation of appointments within the system.The following JSON structure is used to store appointments in the JSON file:
+
+ ```json
+ [{"name": "tamari", "date": "30/10/2023", "time": "10:00"}]
+ ```
+
 ## Validator testing
 - Pep8
 
@@ -129,6 +141,8 @@ There is no unfixed bugs.
 ## Credits
 - Code institute for the deployment terminal.
 - Relyed on W3school, ChatGPt and MDN for general references throughout the project.
+## General Reference
+- I plan to improve the application's functionality by prompting users to return to the menu if they attempt to book on weekends, past dates, or choose invalid time options.
 
 
 
