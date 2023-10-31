@@ -1,33 +1,27 @@
 '''import modules to set up initial enviroment for project '''
-# import datetime class from datetime module to work with dates
 from datetime import datetime
-# import json to read and write data
 import json
-# import os to interact with operating system
 import os
+
 # define file path for json file
 FILE_PATH = 'appointments.json'
-'''define function which will clear terminal
-screen screen for improving console output clarity.'''
 
 
 def screen_clear():
+    """define function which will clear terminal
+screen screen for improving console output clarity."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-'''this function  checks if user pass correct time'''
-
-
 def time_validator(time_option):
+    """this function  checks if user pass correct time"""
     screen_clear()
     valid_options = [1, 2, 3, 4, 5, 6]
     return time_option in valid_options
 
 
-'''this  function checks if the name is correctly formatted'''
-
-
 def name_validator(name):
+    """this  function checks if the name is correctly formatted"""
     screen_clear()
     while True:
         name_word = name.split()
@@ -43,18 +37,14 @@ def name_validator(name):
             name = input('Please enter your name: ').strip()
 
 
-'''this function checks if user choice is a valid option'''
-
-
 def user_choice_validator(user_choice):
+    """this function checks if user choice is a valid option"""
     user_options = [1, 2, 3, 4, 0]
     return user_choice in user_options
 
 
-'''this functions validates and parse a date in dd/mm/yyyy format'''
-
-
 def date_validation(date):
+    """this functions validates and parse a date in dd/mm/yyyy format"""
     while True:
         if not date.count('/') == 2:
             screen_clear()
@@ -71,12 +61,11 @@ def date_validation(date):
         date = input('Please enter the date (dd/mm/yyyy): \n ')
 
 
-'''This function searches through
-a list of appointments to find all the booked times
-    for a specified date in the correct date format. '''
-
-
 def booked_times(appointments, correct_format_date):
+    """This function searches through
+a list of appointments to find all the booked times
+    for a specified date in the correct date format.
+"""
     booked_times = []
     for appointment in appointments:
         if appointment['date'] == correct_format_date:
@@ -84,10 +73,8 @@ def booked_times(appointments, correct_format_date):
     return booked_times
 
 
-'''this function prints appointment details '''
-
-
 def show_appointment(appointments):
+    """this function prints appointment details"""
     print('\n appointments')
     print('Name\t\tDate\t\tTime')
     print('-' * 50)
@@ -99,13 +86,11 @@ def show_appointment(appointments):
         )
 
 
-'''this function  displays latest appointment
+def just_booked(new_appointment):
+    """this function  displays latest appointment
 information,it checks if new appointment is dictionery or not,
 if it is dictionery takes keys and its values
-from there if not just prints new_appointment'''
-
-
-def just_booked(new_appointment):
+from there if not just prints new_appointment"""
     if isinstance(new_appointment, dict):
         print(f'Name: {new_appointment.get("name", "N/A")}')
         print(f'Date: {new_appointment.get("date", "N/A")}')
@@ -114,12 +99,13 @@ def just_booked(new_appointment):
         print(new_appointment)
 
 
-'''this function checks if there is or not
-appointments booked for today, if there is it displays appointment details,
-if not simply says that there is no appointments booked for today '''
+
 
 
 def todays_appointments(appointments):
+    """this function checks if there is or not
+appointments booked for today, if there is it displays appointment details,
+if not simply says that there is no appointments booked for today"""
     screen_clear()
     today = datetime.now().date()
     correct_format_today = today.strftime('%d/%m/%Y')
@@ -135,10 +121,8 @@ def todays_appointments(appointments):
     back_to_menu()
 
 
-''' this function allow user to return to main menu by clicking 1'''
-
-
 def back_to_menu():
+    """this function allow user to return to main menu by clicking 1"""
     while True:
         user_click = int(input('click 1 to go back to main menu \n'))
         try:
@@ -149,11 +133,9 @@ def back_to_menu():
             print('please enter 1 to  go back to main menu')
 
 
-'''define this function to handle user to
-navigate between search appointments and main menu'''
-
-
 def handle_to_user_click(appointments):
+    """define this function to handle user to
+navigate between search appointments and main menu"""
     while True:
         try:
             user_click = int(input('Click 1 to go back to the main menu '
@@ -171,13 +153,11 @@ def handle_to_user_click(appointments):
     return appointments
 
 
-''' search appointment function  help user
+def search_appointment(appointments):
+    """ search appointment function  help user
 to search appointments by name or by date,
 if specified appointment exists it displays on screen
-if not simply says there is no appointments for specified  date(or name)'''
-
-
-def search_appointment(appointments):
+if not simply says there is no appointments for specified  date(or name)"""
     screen_clear()
     while True:
         try:
@@ -226,10 +206,8 @@ def search_appointment(appointments):
     return appointments
 
 
-''' Allow the user to cancel an appointment by providing name and date.'''
-
-
-def cancell_appointment(appointments):
+def cancel_appointment(appointments):
+    """Allow the user to cancel an appointment by providing name and date."""
     screen_clear()
     while True:
         name = input('Please enter your  name:\n ')
@@ -268,11 +246,9 @@ def cancell_appointment(appointments):
                 return appointments
 
 
-''' this function allows user to book
-an appointment by specifying name date  and time'''
-
-
 def book_appointment(appointments):
+    """ this function allows user to book
+an appointment by specifying name date  and time"""
     screen_clear()
     while True:
         date = input('Please let us know when you want to book an appointment '
@@ -309,7 +285,7 @@ def book_appointment(appointments):
                 if name_validator(name):
                     try:
                         time_options = int(input('Please choose '
-                                                 'one option below \n  '
+                                                 'one option below \n'
                                                  '1) 09:00\n'
                                                  '2) 10:00\n'
                                                  '3) 11:00\n'
@@ -363,12 +339,10 @@ def book_appointment(appointments):
     screen_clear()
 
 
-''' this is main menu function which
-is responsible to display main menu
-and let user to chooose one option '''
-
-
 def main_menu():
+    """this is main menu function which
+is responsible to display main menu
+and let user to chooose one option """
     screen_clear()
     try:
         with open(FILE_PATH, 'r') as file:
@@ -379,12 +353,12 @@ def main_menu():
         print('Welcome to the hair-beauty booking app \n')
         try:
             user_choice = int(input(
-                                'please select one option below \n'
+                                'please select one option below\n'
                                 '1) book an appointment \n'
                                 '2) Todays appointments\n'
                                 '3) search appointment\n'
                                 '4) cancell appointment\n'
-                                '0) Quit \n '
+                                '5) Quit \n '
                                 ))
             if user_choice == 1:
                 appointments = book_appointment(appointments)
@@ -393,8 +367,8 @@ def main_menu():
             elif user_choice == 3:
                 appointments = search_appointment(appointments)
             elif user_choice == 4:
-                appointments = cancell_appointment(appointments)
-            elif user_choice == 0:
+                appointments = cancel_appointment(appointments)
+            elif user_choice == 5:
                 screen_clear()
                 print('GoodBye')
                 break
