@@ -36,7 +36,7 @@ The main menu offers users easy navigation and presents five key options, which 
 
 As shown in the image above, the first option is 'Book Appointment.' When the user selects option 1, an empty page opens, prompting the user to enter the appointment date.
 
-[!make-ppointment!](/docs/images/booking-date.png)
+![make-ppointment!](/docs/images/booking-date.png)
 
 - This app allows users to input and retrieve validated data. If a user accidentally enters an invalid date format, the app will provide a notification.
 
