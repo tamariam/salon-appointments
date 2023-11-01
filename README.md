@@ -30,37 +30,37 @@ The main menu offers users easy navigation and presents five key options, which 
 
 ![invalid-input!](/docs/images/main-menu%20if%20enter%20invalid%20input.png)
 
-![invalid-input!](/docs/assets/images/main-menu-letters.png)
+![invalid-input!](/docs/images/main-menu-letters.png)
 
 ### book appintment
 
 As shown in the image above, the first option is 'Book Appointment.' When the user selects option 1, an empty page opens, prompting the user to enter the appointment date.
 
-[!make-ppointment!](/docs/assets/images/booking-date.png)
+[!make-ppointment!](/docs/images/booking-date.png)
 
 - This app allows users to input and retrieve validated data. If a user accidentally enters an invalid date format, the app will provide a notification.
 
-![invalid-date!](/docs/assets/images/booking-nvalid-date.png)
+![invalid-date!](/docs/images/booking-nvalid-date.png)
 
 - If user correctly enters date, then will be asked to enter name.
 
-![name!](/docs/assets/images/cancell-appointment-name.png)
+![name!](/docs/images/cancell-appointment-name.png)
 
 - If a user enters an invalid name format, they will be informed with an appropriate error message
 
-![invalid-name-format!](/docs/assets/images/invalid-name.png)
+![invalid-name-format!](/docs/images/invalid-name.png)
 
 - if name is entered correctly, then user should be able to select appropriate time.
 
-![booking-time!](/docs/assets/images/booking-select-time.png)
+![booking-time!](/docs/images/booking-select-time.png)
 
 -If user accidently press incorrect key, will be informed about it.
 
-![nonvalid-time!](/docs/assets/images/booking-%20if-nonvalid-time.png)
+![nonvalid-time!](/docs/images/booking-%20if-nonvalid-time.png)
 
 - if time on  date entered is not available , user will be informed.
 
-![no-available!](/docs/assets/images/no-avability.png)
+![no-available!](/docs/images/no-avability.png)
 
 - If the user enters a weekend date, the system will notify that the salon is closed on weekends.
 
@@ -68,27 +68,27 @@ As shown in the image above, the first option is 'Book Appointment.' When the us
 
 - After successfully booking an appointment, the user will see the message displayed in the image below.
 
-![appointment-booked!](/docs/assets/images/appointment%20booked.png)
+![appointment-booked!](/docs/images/appointment%20booked.png)
 
  
 ### Todays appointments
 
 If the user selects the second option from the main menu, they will navigate to the 'Today's Appointments' page. If appointments are booked for today, they will be displayed in the terminal; otherwise, an appropriate message will be shown.
 
-![todays-appointments](/docs/assets/images/todays-appointments.png)
+![todays-appointments](/docs/images/todays-appointments.png)
 
-![no-appointments-for-today!](/docs/assets/images/today-no-appointments.png)
+![no-appointments-for-today!](/docs/images/today-no-appointments.png)
 
 ### Search appointments
 
 After choosing the third option, the user can search for appointments by date or by name. Validations are in place for both date and name inputs, so if the user enters an invalid name or date format, they will be notified. If there are no appointments for the specified date, the user will receive a message to that effect. If appointments exist, the user can view their details.
 
-![search-appointment!](/docss/assets/images/search-appointment.png)
+![search-appointment!](/docs/images/search-appointment.png)
 
 ### cancel appointment
 
 The Salon Appointments app allows users to cancel appointments. To cancel an appointment, the user should enter the name and date. If an appointment is booked for the specified date and name, it will be canceled. If no appointment exists with the provided details, the user will receive a message displayed on the screen.
-![cancelled-appointment!](/docs/assets/images/cancell-appointment%20.png)
+![canceled-appointment!](/docs/images/cancell-appointment%20.png)
 
 ### Quit
 
